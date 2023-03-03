@@ -1,6 +1,9 @@
 <script setup>
+import {onMounted} from "vue";
+import {init} from "./scene.js";
 import Header from "@/components/Header.vue";
 
+onMounted(init);
 </script>
 
 <template>
@@ -149,6 +152,23 @@ import Header from "@/components/Header.vue";
       font-size: 3.5rem;
     }
   }
+
+  /**
+    기본적으로 보이지않고, body의 id에 따라서 스크롤이 어떤섹션에 위치했을때 보일지 정한다.
+   */
+  .sticky-elem {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  #show-scene-0 #scroll-section-0 .sticky-elem,
+  #show-scene-1 #scroll-section-1 .sticky-elem,
+  #show-scene-2 #scroll-section-2 .sticky-elem,
+  #show-scene-3 #scroll-section-3 .sticky-elem {
+    display: block;
+  }
 }
 
 footer {
@@ -159,6 +179,7 @@ footer {
   background-color: #191F28;
   color: #fff;
 }
+
 
 /**
   1024이상이면 적용되는 스타일
