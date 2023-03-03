@@ -1,4 +1,6 @@
 export function init() {
+    let yOffset = 0; // window.pageYOffset 대신 사용할 변수
+    
     const sceneInfo = [
         {
             type: 'sticky',
@@ -43,7 +45,15 @@ export function init() {
         }
     }
 
+    function scrollLoop() {
+        
+    }
+
     window.addEventListener('resize', setLayout);
+    window.addEventListener('scroll', () => {
+        yOffset = window.scrollY;
+        scrollLoop();
+    });
 
     setLayout();
 }
