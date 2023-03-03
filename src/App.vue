@@ -16,15 +16,15 @@ onMounted(init);
       <div class="sticky-elem main-message a">
         <p>온전히 빠져들게 하는<br/>최고급 박스</p>
       </div>
-<!--      <div class="sticky-elem main-message b">-->
-<!--        <p>사업장 음식물 쓰레기<br/>수거 서비스</p>-->
-<!--      </div>-->
-<!--      <div class="sticky-elem main-message c">-->
-<!--        <p>무심코 버리고 있는<br/>음식물 쓰레기</p>-->
-<!--      </div>-->
-<!--      <div class="sticky-elem main-message d">-->
-<!--        <p>업박스는<br/>믿을 수 있습니다</p>-->
-<!--      </div>-->
+      <div class="sticky-elem main-message b">
+        <p>사업장 음식물 쓰레기<br/>수거 서비스</p>
+      </div>
+      <div class="sticky-elem main-message c">
+        <p>무심코 버리고 있는<br/>음식물 쓰레기</p>
+      </div>
+      <div class="sticky-elem main-message d">
+        <p>업박스는<br/>믿을 수 있습니다</p>
+      </div>
     </section>
     <section class="scroll-section" id="scroll-section-1">
       <p class="description">
@@ -73,10 +73,22 @@ onMounted(init);
 .scroll-section {
   padding-top: 50vh;
 
+  /**
+    기본적으로 보이지않고, body의 id에 따라서 스크롤이 어떤섹션에 위치했을때 보일지 정한다.
+   */
+  .sticky-elem {
+    display: none;
+    position: fixed;
+    left: 0;
+    width: 100%;
+  }
+
   .main-message {
     display: flex;
     align-items: center;
     justify-content: center;
+    top: 35vh;
+    margin: 5px 0;
     height: 3em;
     font-size: 2.5rem;
     opacity: 0;
@@ -152,17 +164,6 @@ onMounted(init);
     .main-message {
       font-size: 3.5rem;
     }
-  }
-
-  /**
-    기본적으로 보이지않고, body의 id에 따라서 스크롤이 어떤섹션에 위치했을때 보일지 정한다.
-   */
-  .sticky-elem {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
   }
 }
 
