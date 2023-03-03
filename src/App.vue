@@ -14,16 +14,16 @@ onMounted(init);
       <h1>AirUpbox Pro</h1>
 
       <div class="sticky-elem main-message a">
-        <p>온전히 빠져들게 하는<br/>최고급 박스</p>
+        <p>업박스는<br/>정확하게 측정합니다.</p>
       </div>
       <div class="sticky-elem main-message b">
-        <p>사업장 음식물 쓰레기<br/>수거 서비스</p>
+        <p>업박스는<br/>청결하게 관리합니다.</p>
       </div>
       <div class="sticky-elem main-message c">
-        <p>무심코 버리고 있는<br/>음식물 쓰레기</p>
+        <p>업박스는<br/>실시간 데이터를 제공합니다.</p>
       </div>
       <div class="sticky-elem main-message d">
-        <p>업박스는<br/>믿을 수 있습니다</p>
+        <p>업박스는<br/>빠르게 응대합니다.</p>
       </div>
     </section>
     <section class="scroll-section" id="scroll-section-1">
@@ -35,8 +35,8 @@ onMounted(init);
     <section class="scroll-section" id="scroll-section-2">
       <div class="sticky-elem main-message a">
         <p>
-          <small>편안한 촉감</small>
-          박스와 하나 되다
+          <small>폐기물 관리의</small>
+          새로운 기준
         </p>
       </div>
       <div class="sticky-elem desc-message b">
@@ -163,15 +163,14 @@ onMounted(init);
   &#scroll-section-2 {
     .main-message {
       font-size: 3.5rem;
-
-      &.b {
-        top: 10%;
-        left: 40%;
-      }
-      &.c {
-        top: 15%;
-        left: 45%;
-      }
+    }
+    .b {
+      top: 10%;
+      left: 40%;
+    }
+    .c {
+      top: 15%;
+      left: 45%;
     }
   }
 }
@@ -232,11 +231,11 @@ footer {
       .main-message {
         font-size: 6vw;
       }
-      &.b {
+      .b {
         top: 20%;
         left: 53%;
       }
-      &.c {
+      .c {
         left: 55%;
       }
     }
