@@ -33,19 +33,19 @@ onMounted(init);
       </p>
     </section>
     <section class="scroll-section" id="scroll-section-2">
-      <div class="sticky-elem main-message">
+      <div class="sticky-elem main-message a">
         <p>
           <small>편안한 촉감</small>
           박스와 하나 되다
         </p>
       </div>
-      <div class="sticky-elem desc-message">
+      <div class="sticky-elem desc-message b">
         <p>
           폐기물 관리 원스톱솔루션, 업박스.. 폐기물이 배출되는 사업장에서부터 마지막 처리까지 전 과정을 관리합니다. 폐기물 산업과 고객의 니즈에 대한 이해를 바탕으로 각 사업장에 맞는 최적의 폐기물 관리 솔루션 제공합니다.
         </p>
         <div class="pin"></div>
       </div>
-      <div class="sticky-elem desc-message">
+      <div class="sticky-elem desc-message c">
         <p>
           정확한 측량 눈금이 있는 전용 용기를 통해 배출량 확인합니다. 2차 검증을 위해 AI 부피 측정 기술을 개발 중입니다.
         </p>
@@ -163,6 +163,15 @@ onMounted(init);
   &#scroll-section-2 {
     .main-message {
       font-size: 3.5rem;
+
+      &.b {
+        top: 10%;
+        left: 40%;
+      }
+      &.c {
+        top: 15%;
+        left: 45%;
+      }
     }
   }
 }
@@ -189,11 +198,6 @@ footer {
  */
 @media (min-width: 1024px) {
   .scroll-section {
-    &#scroll-section-0 {
-      h1 {
-        font-size: 9vw;
-      }
-    }
     .main-message {
       font-size: 4vw;
 
@@ -218,9 +222,22 @@ footer {
       font-size: 2rem;
     }
 
+
+    &#scroll-section-0 {
+      h1 {
+        font-size: 9vw;
+      }
+    }
     &#scroll-section-2 {
       .main-message {
         font-size: 6vw;
+      }
+      &.b {
+        top: 20%;
+        left: 53%;
+      }
+      &.c {
+        left: 55%;
       }
     }
   }
