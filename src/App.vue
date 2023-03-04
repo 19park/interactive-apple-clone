@@ -65,7 +65,7 @@ onMounted(init);
         쾌적한 환경을 조성하고<br/>
         양질의 폐자원을 배출합니다.
       </p>
-      <canvas class="image-blend-canvas" width="1920" height="1080"></canvas>
+      <canvas class="image-blend-canvas" width="1920" height="992"></canvas>
       <p class="canvas-caption">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae est ipsa minima, eligendi error cum vel dolorum pariatur officia facilis ipsam voluptatibus ad quasi porro quod quisquam quidem tempora accusantium accusamus, quaerat aliquam velit exercitationem incidunt? Id vitae quisquam saepe quasi accusantium tempore enim! Aperiam dolorum a vero repellat dolor, inventore ab odit totam molestias expedita? Enim quia dolor maiores veniam ea! Quam illo, est incidunt ipsa reiciendis modi quisquam reprehenderit fuga velit dolorem odit sequi autem blanditiis, ullam commodi quibusdam. Accusamus repellat aperiam quis neque laudantium, dignissimos hic nisi magnam praesentium enim beatae sint architecto cum numquam inventore rerum animi sed nostrum quae delectus, voluptas molestiae placeat aliquid! Vel quaerat error officiis magnam dolorum iste aspernatur at est! Quo, consequuntur? Reiciendis, dolor. Quo at cupiditate in iure obcaecati voluptatum vel ea! Ab vel harum facere hic fuga ducimus sapiente dolore dolorem, nobis sint perferendis cumque esse! Omnis fugiat sint error laborum eveniet labore nam ducimus quisquam in repudiandae impedit excepturi dignissimos tenetur libero placeat rerum maxime tempore, aut nihil. Qui, quam? Voluptate fuga possimus itaque quas nesciunt iste, facilis mollitia illo qui placeat temporibus inventore obcaecati. Recusandae, sequi dignissimos in natus eum maiores dolorem, deleniti nobis accusantium, aspernatur beatae.
       </p>
@@ -79,28 +79,8 @@ onMounted(init);
 
 <style scoped lang="scss">
 .scroll-section {
+  position: relative;
   padding-top: 50vh;
-
-  /**
-    기본적으로 보이지않고, body의 id에 따라서 스크롤이 어떤섹션에 위치했을때 보일지 정한다.
-   */
-  .sticky-elem {
-    display: none;
-    position: fixed;
-    left: 0;
-    width: 100%;
-
-    &.sticky-elem-canvas {
-      top: 0;
-      height: 100%;
-
-      canvas {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-      }
-    }
-  }
 
   .main-message {
     display: flex;
@@ -122,6 +102,27 @@ onMounted(init);
       display: block;
       font-size: 1.2rem;
       margin-bottom: .5em;
+    }
+  }
+
+  /**
+    기본적으로 보이지않고, body의 id에 따라서 스크롤이 어떤섹션에 위치했을때 보일지 정한다.
+   */
+  .sticky-elem {
+    display: none;
+    position: fixed;
+    left: 0;
+    width: 100%;
+
+    &.sticky-elem-canvas {
+      top: 0;
+      height: 100%;
+
+      canvas {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+      }
     }
   }
 
@@ -200,6 +201,12 @@ onMounted(init);
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    .image-blend-canvas.sticky {
+      position: fixed;
+      top: 0;
+      z-index: 10;
+    }
   }
 }
 
@@ -244,6 +251,8 @@ footer {
       width: 20%;
     }
     .mid-message {
+      width: 1000px;
+      padding: 0;
       font-size: 4vw;
     }
     .canvas-caption {
