@@ -125,20 +125,20 @@ export function init() {
         let imgElem;
         for (let i = 0; i < sceneInfo[0].values.videoImageCount; i++) {
             imgElem = new Image();
-            imgElem.src = `/video/001/IMG_${6726 + i}.JPG`;
+            imgElem.src = getImageUrl(`/video/001/IMG_${6726 + i}.JPG`);
             sceneInfo[0].objs.videoImages.push(imgElem);
         }
         let imgElem2;
         for (let i = 0; i < sceneInfo[2].values.videoImageCount; i++) {
             imgElem2 = new Image();
-            imgElem2.src = `/video/002/IMG_${7027 + i}.JPG`;
+            imgElem2.src = getImageUrl(`/video/002/IMG_${7027 + i}.JPG`);
             sceneInfo[2].objs.videoImages.push(imgElem2);
         }
 
         let imgElem3;
         for (let i = 0; i < sceneInfo[3].objs.imagesPath.length; i++) {
             imgElem3 = new Image();
-            imgElem3.src = sceneInfo[3].objs.imagesPath[i];
+            imgElem3.src = getImageUrl(sceneInfo[3].objs.imagesPath[i]);
             sceneInfo[3].objs.images.push(imgElem3);
         }
     }
@@ -494,4 +494,12 @@ export function init() {
         sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
     });
     window.addEventListener('resize', setLayout);
+}
+
+function getImageUrl(pathname) {
+    return new URL(
+        (process.env.NODE_ENV === 'production' ?
+            '/interactive-apple-clone/' : '') + pathname,
+        import.meta.url
+    ).href
 }
