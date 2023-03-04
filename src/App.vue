@@ -36,6 +36,10 @@ onMounted(init);
       </p>
     </section>
     <section class="scroll-section" id="scroll-section-2">
+      <div class="sticky-elem sticky-elem-canvas">
+        <canvas id="video-canvas-1" width="1920" height="1080"></canvas>
+      </div>
+
       <div class="sticky-elem main-message a">
         <p>
           <small>폐기물 관리의</small>
@@ -87,6 +91,13 @@ onMounted(init);
 
     &.sticky-elem-canvas {
       top: 0;
+      height: 100%;
+
+      canvas {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+      }
     }
   }
 
@@ -163,6 +174,9 @@ onMounted(init);
 
   &#scroll-section-0 {
     h1 {
+      position: relative;
+      top: -10vh;
+      z-index: 5;
       font-size: 4rem;
       text-align: center;
     }
