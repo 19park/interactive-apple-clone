@@ -13,6 +13,9 @@ onMounted(init);
     <section class="scroll-section" id="scroll-section-0">
       <h1>AirUpbox Pro</h1>
 
+      <div class="sticky-elem sticky-elem-canvas">
+        <canvas id="video-canvas-0" width="1920" height="1080"></canvas>
+      </div>
       <div class="sticky-elem main-message a">
         <p>업박스는<br/>정확하게 측정합니다.</p>
       </div>
@@ -81,6 +84,10 @@ onMounted(init);
     position: fixed;
     left: 0;
     width: 100%;
+
+    &.sticky-elem-canvas {
+      top: 0;
+    }
   }
 
   .main-message {

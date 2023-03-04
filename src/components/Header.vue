@@ -42,6 +42,7 @@
   width: 100%;
   height: 44px;
   padding: 0 1rem;
+  z-index: 10;
 }
 /**
   하단 스타일
@@ -54,6 +55,8 @@
   height: 52px;
   padding: 0 1rem;
   border-bottom: 1px solid #ddd;
+  z-index: 11;
+
   .local-nav-links {
     a {
       margin-left: 2em;
