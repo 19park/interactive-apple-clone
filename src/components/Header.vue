@@ -70,4 +70,10 @@
     }
   }
 }
+.local-nav-sticky .local-nav {
+  position: fixed;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: saturate(180%) blur(15px);
+}
 </style>

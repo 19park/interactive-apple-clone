@@ -78,6 +78,9 @@ onMounted(init);
 </template>
 
 <style scoped lang="scss">
+.container {
+  overflow-x: hidden;
+}
 .scroll-section {
   position: relative;
   padding-top: 50vh;
@@ -166,14 +169,6 @@ onMounted(init);
     }
   }
 
-  .canvas-caption {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 1rem;
-    font-size: 1.2rem;
-    color: #888;
-  }
-
 
   &#scroll-section-0 {
     h1 {
@@ -206,6 +201,14 @@ onMounted(init);
       position: fixed;
       top: 0;
       z-index: 10;
+    }
+
+    .canvas-caption {
+      max-width: 1000px;
+      margin: -24rem auto 0;
+      padding: 0 1rem;
+      font-size: 1.2rem;
+      color: #888;
     }
   }
 }
@@ -277,6 +280,13 @@ footer {
       }
       .c {
         left: 55%;
+      }
+    }
+    &#scroll-section-3 {
+      .canvas-caption {
+        margin-top: -10rem;
+        padding: 0;
+        font-size: 2rem;
       }
     }
   }
