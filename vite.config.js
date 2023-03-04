@@ -4,7 +4,7 @@ import vue from '@vitejs/plugin-vue';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/interactive-apple-clone/',
+  base: '',
   plugins: [vue()],
   resolve: {
     // src 경로를 바라보는 별명 @ 를 추가한다.
