@@ -3,6 +3,10 @@ export function init() {
     let prevScrollHeight = 0; // 현재 스크롤위치보다 이전에 위치한 섹션들의 높이 합
     let currentScene = 0; // 현재 활성화된 씬(section)
     let enterNewScene = false; // 새로운 씬이 시작될 때 true
+    let acc = 0.2;
+    let delayedYOffset = 0;
+    let rafId;
+    let rafState;
 
     const sceneInfo = [
         {
@@ -217,8 +221,8 @@ export function init() {
         switch (currentScene) {
             case 0:
                 // console.log('0 play');
-                let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
-                objs.context.drawImage(objs.videoImages[sequence], 0, 0);
+                // let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
+                // objs.context.drawImage(objs.videoImages[sequence], 0, 0);
                 objs.canvas.style.opacity = calcValues(values.canvas_opacity, currentYOffset);
 
                 if (scrollRatio <= 0.22) {
@@ -265,8 +269,8 @@ export function init() {
 
             case 2:
                 // console.log('2 play');
-                let sequence2 = Math.round(calcValues(values.imageSequence, currentYOffset));
-                objs.context.drawImage(objs.videoImages[sequence2], 0, 0);
+                // let sequence2 = Math.round(calcValues(values.imageSequence, currentYOffset));
+                // objs.context.drawImage(objs.videoImages[sequence2], 0, 0);
 
                 if (scrollRatio <= 0.5) {
                     objs.canvas.style.opacity = calcValues(values.canvas_opacity_in, currentYOffset);
@@ -356,6 +360,7 @@ export function init() {
                 break;
 
             case 3:
+                // console.log('3 play');
                 let step = 0;
                 // 가로/세로 모두 꽉 차게 하기 위해 여기서 세팅(계산 필요)
                 const widthRatio = window.innerWidth / objs.canvas.width;
@@ -410,10 +415,13 @@ export function init() {
 
                 if (scrollRatio < values.rect1X[2].end) {
                     step = 1;
+                    // console.log('캔버스 닿기 전');
                     objs.canvas.classList.remove('sticky');
                 } else {
                     step = 2;
+                    // console.log('캔버스 닿은 후');
                     // 이미지 블렌드
+                    // values.blendHeight: [ 0, 0, { start: 0, end: 0 } ]
                     values.blendHeight[0] = 0;
                     values.blendHeight[1] = objs.canvas.height;
                     values.blendHeight[2].start = values.rect1X[2].end;
@@ -466,13 +474,13 @@ export function init() {
             prevScrollHeight += sceneInfo[i].scrollHeight;
         }
 
-        if (yOffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
+        if (delayedYOffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
             enterNewScene = true;
             if (currentScene >= sceneInfo.length - 1) return;
             currentScene++;
             document.body.setAttribute('id', `show-scene-${currentScene}`);
         }
-        if (yOffset < prevScrollHeight) {
+        if (delayedYOffset < prevScrollHeight) {
             enterNewScene = true;
             if (currentScene === 0) return; // yOffset 음수 방지
             currentScene--;
@@ -484,16 +492,68 @@ export function init() {
         playAnimation();
     }
 
+    function loop() {
+        delayedYOffset = delayedYOffset + (yOffset - delayedYOffset) * acc;
+
+        if (!enterNewScene) {
+            if (currentScene === 0 || currentScene === 2) {
+                const currentYOffset = delayedYOffset - prevScrollHeight;
+                const objs = sceneInfo[currentScene].objs;
+                const values = sceneInfo[currentScene].values;
+                let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
+                if (objs.videoImages[sequence]) {
+                    objs.context.drawImage(objs.videoImages[sequence], 0, 0);
+                }
+            }
+        }
+
+        // 일부 기기에서 페이지 끝으로 고속 이동하면 body id가 제대로 인식 안되는 경우를 해결
+        // 페이지 맨 위로 갈 경우: scrollLoop와 첫 scene의 기본 캔버스 그리기 수행
+        if (delayedYOffset < 1) {
+            scrollLoop();
+            sceneInfo[0].objs.canvas.style.opacity = 1;
+            sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
+        }
+        // 페이지 맨 아래로 갈 경우: 마지막 섹션은 스크롤 계산으로 위치 및 크기를 결정해야할 요소들이 많아서 1픽셀을 움직여주는 것으로 해결
+        if ((document.body.offsetHeight - window.innerHeight) - delayedYOffset < 1) {
+            let tempYOffset = yOffset;
+            scrollTo(0, tempYOffset - 1);
+        }
+
+        rafId = requestAnimationFrame(loop);
+
+        if (Math.abs(yOffset - delayedYOffset) < 1) {
+            cancelAnimationFrame(rafId);
+            rafState = false;
+        }
+    }
+
     window.addEventListener('scroll', () => {
         yOffset = window.scrollY;
         scrollLoop();
         checkMenu();
+
+        if (!rafState) {
+            rafId = requestAnimationFrame(loop);
+            rafState = true;
+        }
     });
     window.addEventListener('load', () => {
         setLayout();
         sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
     });
-    window.addEventListener('resize', setLayout);
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 900) {
+            window.location.reload();
+        }
+    });
+
+    window.addEventListener('orientationchange', () => {
+        scrollTo(0, 0);
+        setTimeout(() => {
+            window.location.reload();
+        }, 500);
+    });
 }
 
 function getImageUrl(pathname) {

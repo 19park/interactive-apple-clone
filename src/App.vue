@@ -272,7 +272,7 @@ footer {
     }
     &#scroll-section-2 {
       .main-message {
-        font-size: 6vw;
+        font-size: 4vw;
       }
       .b {
         top: 20%;
@@ -283,6 +283,9 @@ footer {
       }
     }
     &#scroll-section-3 {
+      .mid-message {
+        margin-bottom: 15vh;
+      }
       .canvas-caption {
         margin-top: -10rem;
         padding: 0;
